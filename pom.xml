@@ -118,7 +118,7 @@
 		</dependency>
 
 		<!-- sh adds -->
-		<!-- hello -->
+		<!-- hi -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
