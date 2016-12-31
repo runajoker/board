@@ -66,8 +66,8 @@ CREATE TABLE t_member
 	UNIQUE (member_id),
 	UNIQUE (member_email)
 );
-
-
+insert into t_member (member_id, member_pw,member_name,member_email)
+values('admin','admin','상훈','runajoker@naver.com');
 
 /* Create Foreign Keys */
 
@@ -93,6 +93,7 @@ ALTER TABLE t_boards
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
+
 
 
 
