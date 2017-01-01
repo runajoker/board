@@ -16,16 +16,17 @@ CREATE TABLE t_article
 (
 	board_no int NOT NULL,
 	article_no int NOT NULL AUTO_INCREMENT,
-	article_title varbinary(100) NOT NULL,
+	article_title varchar(100) NOT NULL,
 	article_user_id varchar(20) NOT NULL,
 	article_user_password varchar(128) NOT NULL,
 	article_content varchar(4000) NOT NULL,
 	article_creation_date datetime DEFAULT now() NOT NULL,
-	article_creating_ip varbinary(128) NOT NULL,
+	article_creating_ip varchar(128) NOT NULL,
 	article_file_name varchar(260),
 	PRIMARY KEY (article_no)
 );
-
+insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
+values (1, '내용', 'admin', 'test', '한글되냐', 'localhost');
 
 CREATE TABLE t_boards
 (
@@ -37,7 +38,8 @@ CREATE TABLE t_boards
 	UNIQUE (board_no),
 	UNIQUE (board_name)
 );
-
+insert into t_boards(board_name, board_status, member_no) 
+values ('free', true, 1);
 
 CREATE TABLE t_comment
 (
@@ -66,9 +68,9 @@ CREATE TABLE t_member
 	UNIQUE (member_id),
 	UNIQUE (member_email)
 );
-insert into t_member (member_id, member_pw,member_name,member_email)
-values('admin','admin','상훈','runajoker@naver.com');
-
+insert into t_member (member_id, member_pw,member_name,member_email, member_point, member_level)
+values('admin','admin','상훈','runajoker@naver.com', 10000, 9);
+update t_member set member_level = 9 , member_point = 100000
 /* Create Foreign Keys */
 
 ALTER TABLE t_comment
@@ -94,6 +96,14 @@ ALTER TABLE t_boards
 	ON DELETE RESTRICT
 ;
 
+alter table t_article
+	add article_readcount int not null default 0
 
+delete from t_member
+select article_no, article_title, article_user_id, article_creation_date, article_readcount 
 
+from t_article
 
+select article_no, article_title, article_user_id,
+		article_creation_date, article_readcount
+		from t_article

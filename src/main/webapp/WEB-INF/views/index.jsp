@@ -28,11 +28,11 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li class="current"><a href="/main">Home</a></li>
+								<!-- <li class="current"><a href="/main">Home</a></li> -->
 								<li>
 									<a href="#">Dropdown</a>
 									<ul>
-										<li><a href="#">Lorem dolor</a></li>
+										<li><a href="#">주인 소개</a></li>
 										<li><a href="#">Magna phasellus</a></li>
 										<li><a href="#">Etiam sed tempus</a></li>
 										<li>

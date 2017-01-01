@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
 	<!-- mybatis running needs this beans properties -->
 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" 
 			p:jndiName="java:comp/env/jdbc/person" /> 
-    
-    
-    
+
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+
+	<!-- board -->
+		<bean id="boardFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+			p:dataSource-ref="dataSource"
+			p:typeAliasesPackage="com.pro.main.board" /> 
+			
+		<bean id="BoardDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+			<property name="mapperInterface" value="com.pro.main.board.BoardDAO" />
+			<property name="sqlSessionFactory" ref="boardFactory" />
+		</bean> 
+
 </beans>
-		
+
 

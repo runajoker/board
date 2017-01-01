@@ -24,14 +24,14 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		
-		return "home";
+
+		return "index";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home2() {
 		
-		return "home";
+		return "index";
 	}
 	
 }
