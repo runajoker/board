@@ -1,9 +1,13 @@
 package com.pro.main.vo;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
 
-public class ArticleVO {
+public class ArticleVO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int board_no;
 	private int article_no;
 	private String article_title;
@@ -13,6 +17,7 @@ public class ArticleVO {
 	private String article_creation_date;
 	private String article_creating_ip;
 	private String article_file_name;
+	private String article_readcount;
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -67,13 +72,22 @@ public class ArticleVO {
 	public void setArticle_file_name(String article_file_name) {
 		this.article_file_name = article_file_name;
 	}
+	public String getArticle_readcount() {
+		return article_readcount;
+	}
+	public void setArticle_readcount(String article_readcount) {
+		this.article_readcount = article_readcount;
+	}
 	@Override
 	public String toString() {
 		return "ArticleVO [board_no=" + board_no + ", article_no=" + article_no + ", article_title=" + article_title
 				+ ", article_user_id=" + article_user_id + ", article_user_password=" + article_user_password
 				+ ", article_content=" + article_content + ", article_creation_date=" + article_creation_date
-				+ ", article_creating_ip=" + article_creating_ip + ", article_file_name=" + article_file_name + "]";
+				+ ", article_creating_ip=" + article_creating_ip + ", article_file_name=" + article_file_name
+				+ ", article_readcount=" + article_readcount + "]";
 	}
+	
+	
 
 	
 }

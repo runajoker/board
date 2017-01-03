@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.main.vo.ArticleVO;
 
@@ -19,7 +20,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "/board")
-	public String boardGo() {
+	public ModelAndView boardGo() {
 		
 		List<ArticleVO> list = boardService.getBoardList();
 		for(ArticleVO avo:list) {
@@ -28,7 +29,7 @@ public class BoardController {
 		}
 		
 		
-		return null;
+		return new ModelAndView("/board/board","list",list);
 	}
 	
 }

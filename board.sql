@@ -26,7 +26,7 @@ CREATE TABLE t_article
 	PRIMARY KEY (article_no)
 );
 insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
-values (1, '내용', 'admin', 'test', '한글되냐', 'localhost');
+values (1, '제목', 'admin', 'test', '한글되냐', 'localhost');
 
 CREATE TABLE t_boards
 (
@@ -107,3 +107,20 @@ from t_article
 select article_no, article_title, article_user_id,
 		article_creation_date, article_readcount
 		from t_article
+		
+select * from t_article		
+		
+DELIMITER $$
+DROP PROCEDURE IF EXISTS FILL_RATE_TEST_DATA$$
+CREATE PROCEDURE FILL_RATE_TEST_DATA()
+BEGIN
+	DECLARE i INT DEFAULT 1;
+		
+	WHILE i <= 300 DO
+		INSERT INTO t_article (board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip) VALUES (1, '제목', 'admin', 'test', '한글되냐', 'localhost');
+		SET i = i + 1;
+	END WHILE;
+END$$
+
+
+DELIMITER $$
