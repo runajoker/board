@@ -2,14 +2,24 @@ package com.pro.main.vo;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pro.main.board.BoardService;
+
 public class PagingVO implements Serializable{
 	
-	int totalCount = 30;
-	int viewCount = 10;
-	int countPage = 10;
-	int pg;
+	@Autowired
+	private BoardService boardService;
+
+	private int viewCount = 10;
+	private int countPage = 10;
+
 	
-	int totalPage = totalCount / viewCount;
+	private int pg;
+	
+	
+	
+	//int totalPage = totalCount / viewCount;
 	
 	
 	
