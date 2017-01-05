@@ -148,3 +148,9 @@ select article_no, article_title, article_content, article_user_id,
 				article_creation_date, article_readcount
 		from t_article
 		where board_no = 1 and article_no = 1
+		
+		
+		select * from t_article where article_no = 1
+		update t_article
+		set article_readcount = article_readcount + 1
+		where article_no = 1
