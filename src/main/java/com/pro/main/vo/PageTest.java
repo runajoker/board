@@ -9,7 +9,7 @@ public class PageTest {
 		int totalcount = 602;
 		int pageViewCount = 15;
 		int countPage = 10;
-		int pg = 61;
+		int pg = 1;
 		
 		
 		int totalPage = totalcount/countPage ;

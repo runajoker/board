@@ -124,3 +124,27 @@ END$$
 
 
 DELIMITER $$
+
+
+select count(*) as count 
+from t_article
+where board_no = 1
+
+order by article_no 
+limit 10, 10
+
+select article_no, article_title, article_user_id,
+				article_creation_date, article_readcount
+		from t_article
+		where board_no = 1
+		order by article_no
+		limit 10, 10
+		
+	select count(*) as cnt 
+	from t_article
+	where board_no = 1
+	
+select article_no, article_title, article_content, article_user_id,
+				article_creation_date, article_readcount
+		from t_article
+		where board_no = 1 and article_no = 1
