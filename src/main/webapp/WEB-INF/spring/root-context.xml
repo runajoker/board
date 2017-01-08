@@ -24,6 +24,16 @@
 			<property name="mapperInterface" value="com.pro.main.board.BoardDAO" />
 			<property name="sqlSessionFactory" ref="boardFactory" />
 		</bean> 
+	<!-- register -->
+		<bean id="registFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+			p:dataSource-ref="dataSource"
+			p:typeAliasesPackage="com.pro.main.regist" />
+			
+		<bean id="RegistDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+			<property name="mapperInterface" value="com.pro.main.regist.RegistDAO" />
+			<property name="sqlSessionFactory" ref="registFactory" />
+		</bean>
+		
 
 </beans>
 

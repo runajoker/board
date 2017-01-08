@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <!--
 	Arcana by HTML5 UP
@@ -48,10 +49,9 @@
 										<li><a href="#">Veroeros feugiat</a></li>
 									</ul>
 								</li>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
-								<li><a href="right-sidebar.html">Right Sidebar</a></li>
-								<li><a href="two-sidebar.html">Two Sidebar</a></li>
-								<li><a href="no-sidebar.html">No Sidebar</a></li>
+								<li><a href="board/1/1/">자유게시판</a></li>
+								<li><a href="blog/">블로그</a></li>
+								<li><a href="regist/">regist</a></li>
 							</ul>
 						</nav>
 
@@ -70,10 +70,14 @@
 					<div class="container">
 						<div class="row 200%">
 							<section class="4u 12u(narrower)">
-								<div class="box highlight">
-									<i class="icon major fa-paper-plane"></i>
-									<h3>board area</h3>
-									<p>board1</p>
+								<div> 
+								
+									<h3>자유게시판</h3>
+									<ul>
+									<c:forEach var="vo" items="${list}">
+									<li><div><a href="board/1/1/${vo.article_no}/"><font size="2">${vo.article_title}</font></a> <em>${vo.article_user_id}</em> ${vo.article_creation_date}</div></li>
+									</c:forEach>
+									</ul>
 								</div>
 							</section>
 							<section class="4u 12u(narrower)">

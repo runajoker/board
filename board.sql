@@ -26,7 +26,7 @@ CREATE TABLE t_article
 	PRIMARY KEY (article_no)
 );
 insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
-values (1, '제목', 'admin', 'test', '한글되냐', 'localhost');
+values (1, 'timestamp test', 'admin', 'test', '^^', 'localhost');
 
 CREATE TABLE t_boards
 (
@@ -154,3 +154,107 @@ select article_no, article_title, article_content, article_user_id,
 		update t_article
 		set article_readcount = article_readcount + 1
 		where article_no = 1
+		
+	select article_no, article_title, article_user_id,
+	case(now() - article_creation_date )			
+		when 
+	article_creation_date
+		from t_article
+		where board_no = 1
+		order by article_no desc
+		limit 0, 4	
+		
+insert into t_article(board_no, article_title, article_user_id, article_creation_date, article_user_password, article_content, article_creating_ip)
+values (1, 'timestamp test', 'admin', '2015-11-30' ,'test', '^^', 'localhost');		
+
+
+insert into t_article(board_no, article_title, article_user_id,  article_user_password, article_content, article_creating_ip)
+values (1, 'timestamp test', 'admin', 'test', '^^', 'localhost');		
+		
+select time_format(SEC_TO_TIME(time_to_sec(now()) - time_to_sec(article_creation_date)), '%Y년 %H시간 %i분 %s초')  
+		
+from t_article where article_no = 607
+
+select time_format(SEC_TO_TIME(now() -article_creation_date), '%H %i %s')  
+		
+from t_article where article_no = 606
+
+select article_creation_date from t_article where article_no = 606
+select sysdate() from dual 
+
+select article_creation_date from t_article where article_no = 605
+select * from t_article order by article_no desc
+
+
+
+select article_creation_date,case 
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 31536000), ' 년 전')
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 2592000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 2592000), ' 달 전')
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 86400 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전')  
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 3600 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 3600), '시간 전')
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 60 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전')
+	else '방금' 
+	end as article_creation_date
+from t_article
+order by article_no desc
+where article_no = 607
+
+select article_creation_date from t_article
+order by article_no desc
+
+
+
+select article_creation_date from t_article where article_no = 607
+
+select time_to_sec(now()) - time_to_sec(article_creation_date) from t_article
+
+select article_creation_date from t_article
+
+select now() - 
+
+
+select A.art_no, A.art_content, A.art_like, A.art_com_cnt, A.art_pic, A.art_regdate, B.mem_no, A.mem_nick 
+from (select a.art_no, a.art_content, a.mem_no, a.mem_nick, a.art_like, art_com_cnt, a.art_pic, 
+case to_char(a.art_regdate, 'YYYY-MM-DD') 
+when to_char(sysdate, 'YYYY-MM-DD') 
+then 'Today, ' 
+|| to_char(a.art_regdate, 'HH:MI:SS') 
+else to_char(a.art_regdate, 'YYYY-MM-DD') 
+end as art_regdate 
+
+from t_article a inner join t_member m on a.mem_no = m.mem_no) A inner join (select mem_no from t_member where mem_no = #{mem_no} or mem_no in (select distinct f.fri_no from t_friend f inner join t_member m on f.mem_no = m.mem_no where f.mem_no = #{mem_no})) B on A.mem_no = B.mem_no order by A.art_no desc
+
+select date_format('17-09-2010', '%d-%m-%Y') from dual
+select time_format(sec_to_time(time_to_sec(now()) - time_to_sec(article_creation_date)), '%H 시간 전') from t_article where article_no = 606
+
+select (sec_to_time(time_to_sec(now()) - time_to_sec(article_creation_date) from t_article where article_no = 606
+
+select (time_to_sec(now()) - time_to_sec(article_creation_date)) from t_article where article_no = 609
+
+select now() - article_creation_date from t_article where article_no = 606
+
+select * from t_article order by article_no desc
+select * from t_article order by article_no desc
+
+select time_to_sec(now()) -time_to_sec(TIME('2011-10-10 01:02:03')) from dual;
+
+select time_format(unix_timestamp(now()) - unix_timestamp(article_creation_date), '%y %m %d %H %i %s') from t_article order by article_no desc
+
+
+select case 
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then time_format(unix_timestamp(now()) - unix_timestamp(article_creation_date), '')
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 2592000 ) 	then unix_timestamp(now())
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 86400 ) 	then unix_timestamp(now())
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 3600 )	 	then unix_timestamp(now())
+	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 60 )	 	then unix_timestamp(now())
+	else '방금' 
+	end
+from t_article
+order by article_no desc
+
+select date_format((unix_timestamp(now()) - unix_timestamp(article_creation_date)),'%Y년%m월%d일' ) as dat from t_article order by dat desc
+
+select article_no,unix_timestamp(now()) - unix_timestamp(article_creation_date) from t_article order by article_no desc 
+select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전') from t_article where article_no = 611 
+select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전') from t_article where article_no = 607 
+select (unix_timestamp(now()) - unix_timestamp(article_creation_date)) from t_article where article_no = 611 

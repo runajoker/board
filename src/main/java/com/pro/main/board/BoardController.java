@@ -42,8 +42,8 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value = " /board/{board_no}/{pg}/{article_no}")
-	public ModelAndView detailArticleShow(@PathVariable int board_no ,@PathVariable int article_no) {
+	@RequestMapping(value = "/board/{board_no}/{pg}/{article_no}/")
+	public ModelAndView detailArticleShow(@PathVariable int board_no ,@PathVariable int article_no, @PathVariable int pg) {
 		boardService.increaseViewCount(article_no);
 		
 		logger.info(article_no+""+board_no);
@@ -52,7 +52,36 @@ public class BoardController {
 		args.put("article_no", article_no);
 		ArticleVO articleVO = boardService.getDetailArticle(args);  
 		logger.info(articleVO.toString());
-		return new ModelAndView("/board/detailArticle","articleVO",articleVO);
+		ModelAndView mav = new ModelAndView("/board/detailArticle","articleVO",articleVO);
+		mav.addObject("pg",pg);
+		return mav;
 	}
 	
+	@RequestMapping(value = "/board/{board_no}/{pg}/{article_no}/delete/")
+	public ModelAndView deleteArticle(@PathVariable int article_no) {
+		try {
+			boardService.deleteArticle(article_no);
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			//세션이 같은게 아니면 삭제 안되게
+		}
+		
+		ModelAndView mav = new ModelAndView("result");
+		mav.addObject("msg","삭제 성공");
+		mav.addObject("url","../../");
+		
+		return mav;
+		
+	}
+	
+	/*@RequestMapping(value = "/board/{board_no}/{pg}/write/")
+	public ModelAndView insertArticle(@PathVariable int board_no) {
+		try {
+			boardService.insertArticle(board_no)
+		}
+		
+		
+		return null;
+	}*/
 }

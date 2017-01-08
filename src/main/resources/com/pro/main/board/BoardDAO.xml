@@ -6,11 +6,19 @@
 
 <mapper namespace="com.pro.main.board.BoardDAO">
 	<select id="getBoardList" resultType="com.pro.main.vo.ArticleVO" parameterType="hashMap">
-		select article_no, article_title, article_user_id,
-				article_creation_date, article_readcount
+		select board_no, article_no, article_title, article_user_id,
+				article_readcount,
+				case
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 31536000), ' 년 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 2592000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 2592000), ' 달 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 86400 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전')  
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 3600 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 3600), '시간 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 60 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전')
+				else '방금 전' 
+			end as article_creation_date
 		from t_article
 		where board_no = #{board_no} 
-		order by article_no
+		order by article_no desc
 		limit #{pg}, 15
 
 	</select>
@@ -23,7 +31,15 @@
 	
 	<select id="getDetailArticle" parameterType="hashMap" resultType="com.pro.main.vo.ArticleVO">
 	select article_no, article_title, article_content, article_user_id,
-				article_creation_date, article_readcount
+				article_readcount,
+				case
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 31536000), ' 년 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 2592000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 2592000), ' 달 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 86400 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전')  
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 3600 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 3600), '시간 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 60 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전')
+				else '방금 전' 
+			end as article_creation_date
 		from t_article
 		where board_no = #{board_no} and article_no = #{article_no}
 	</select>
@@ -33,4 +49,25 @@
 		set article_readcount = article_readcount + 1
 		where article_no = #{article_no}
 	</update>
+	
+	<select id="getBoardNew4Article" resultType="com.pro.main.vo.ArticleVO">
+		select board_no, article_no, article_title, article_user_id,
+				case
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 31536000), ' 년 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 2592000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 2592000), ' 달 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 86400 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전')  
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 3600 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 3600), '시간 전')
+					when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 60 )	 then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전')
+				else '방금 전' 
+			end as article_creation_date
+		from t_article
+		where board_no = 1
+		order by article_no desc
+		limit 0, 4	
+	</select>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from t_article
+		where article_no = #{article_no}
+	</delete>
 </mapper>

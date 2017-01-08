@@ -34,4 +34,14 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.increaseViewCount(article_no);
 	}
 
+	@Override
+	public List<ArticleVO> getBoardNew4Article() {
+		return boardDAO.getBoardNew4Article();
+	}
+
+	@Override
+	public void deleteArticle(int article_no) {
+		boardDAO.deleteArticle(article_no);
+	}
+
 }

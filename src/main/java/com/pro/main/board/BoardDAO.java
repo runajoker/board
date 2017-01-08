@@ -15,4 +15,8 @@ public interface BoardDAO {
 
 	void increaseViewCount(int article_no);
 
+	List<ArticleVO> getBoardNew4Article();
+
+	void deleteArticle(int article_no);
+
 }
