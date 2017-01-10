@@ -70,4 +70,9 @@
 		delete from t_article
 		where article_no = #{article_no}
 	</delete>
+	
+	<insert id="createArticle" parameterType="com.pro.main.vo.ArticleVO">
+		insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
+		values (#{board_no}, #{article_title}, #{article_user_id}, #{article_user_password}, #{article_content}, 'not used');	
+	</insert>
 </mapper>

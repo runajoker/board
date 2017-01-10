@@ -185,7 +185,8 @@ select sysdate() from dual
 select article_creation_date from t_article where article_no = 605
 select * from t_article order by article_no desc
 
-
+insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
+values (1, 'timestamp test', 'admin', 'test', '^^', 'localhost');
 
 select article_creation_date,case 
 	when(unix_timestamp(now()) - unix_timestamp(article_creation_date) > 31536000 ) then concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 31536000), ' 년 전')
@@ -258,3 +259,4 @@ select article_no,unix_timestamp(now()) - unix_timestamp(article_creation_date) 
 select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 60), '분 전') from t_article where article_no = 611 
 select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전') from t_article where article_no = 607 
 select (unix_timestamp(now()) - unix_timestamp(article_creation_date)) from t_article where article_no = 611 
+

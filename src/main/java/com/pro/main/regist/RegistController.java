@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RegistController {
 
-	@RequestMapping(value ="/regist/")
+	@RequestMapping(value ="/regist/sod")
 	public String moveRegistView() {
 		
 		return "/regist/regist";

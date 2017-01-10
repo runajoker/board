@@ -19,4 +19,6 @@ public interface BoardDAO {
 
 	void deleteArticle(int article_no);
 
+	void createArticle(ArticleVO articleVO);
+
 }

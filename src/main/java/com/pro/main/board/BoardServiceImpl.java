@@ -44,4 +44,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteArticle(article_no);
 	}
 
+	@Override
+	public void createArticle(ArticleVO articleVO) {
+		boardDAO.createArticle(articleVO);
+	}
+
 }

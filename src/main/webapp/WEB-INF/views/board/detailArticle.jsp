@@ -74,19 +74,6 @@
 						<footer> <a href="#" class="button">Continue Reading</a>
 						</footer> </section>
 
-						<section>
-						<h3>Another Subheading</h3>
-						<ul class="links">
-							<li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-							<li><a href="#">Ornare in hendrerit in lectus</a></li>
-							<li><a href="#">Semper mod quis eget mi dolore</a></li>
-							<li><a href="#">Consequat etiam lorem phasellus</a></li>
-							<li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-							<li><a href="#">Semper mod quisturpis nisi</a></li>
-						</ul>
-						<footer> <a href="#" class="button">More Random Links</a>
-						</footer> </section>
-
 					</div>
 				</div>
 				<div class="8u  12u(narrower) important(narrower)">

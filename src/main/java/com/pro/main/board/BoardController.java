@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.main.vo.ArticleVO;
@@ -75,13 +79,29 @@ public class BoardController {
 		
 	}
 	
-	/*@RequestMapping(value = "/board/{board_no}/{pg}/write/")
-	public ModelAndView insertArticle(@PathVariable int board_no) {
-		try {
-			boardService.insertArticle(board_no)
-		}
+	@RequestMapping(value = "/board/{board_no}/{pg}/create/", method = RequestMethod.GET)
+	public String moveWriteForm(HttpSession session) {
+
+		return "/board/insert";
+	}
+
+	@RequestMapping(value = "/board/{board_no}/{pg}/create/", method = RequestMethod.POST)
+	public ModelAndView createArticle(@PathVariable int board_no, HttpSession session, HttpServletRequest request) {
 		
+		logger.info(request.getParameter("subject"));
+		logger.info(request.getParameter("username"));
+		logger.info(request.getParameter("userpw"));
+		logger.info(request.getParameter("content"));
+		ArticleVO articleVO = new ArticleVO();
+		articleVO.setArticle_title(request.getParameter("subject"));
+		articleVO.setArticle_user_id(request.getParameter("username"));
+		articleVO.setArticle_user_password(request.getParameter("userpw"));
+		articleVO.setArticle_content(request.getParameter("content"));
+		articleVO.setBoard_no(board_no);
 		
-		return null;
-	}*/
+		boardService.createArticle(articleVO);
+		logger.info(board_no+"");
+		
+		return new ModelAndView("redirect:../");
+	}
 }
