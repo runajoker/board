@@ -80,6 +80,10 @@ ALTER TABLE t_comment
 	ON DELETE RESTRICT
 ;
 
+ALTER TABLE t_article
+	MODIFY COLUMN member_no int NOT NULL DEFAULT 0
+
+	update t_article set member_no = 0;
 
 ALTER TABLE t_article
 	ADD FOREIGN KEY (board_no)
@@ -104,7 +108,7 @@ select article_no, article_title, article_user_id, article_creation_date, articl
 
 from t_article
 
-select article_no, article_title, article_user_id,
+select member_no, article_no, article_title, article_user_id,
 		article_creation_date, article_readcount
 		from t_article
 		
