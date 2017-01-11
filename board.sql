@@ -28,6 +28,8 @@ CREATE TABLE t_article
 insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
 values (1, 'timestamp test', 'admin', 'test', '^^', 'localhost');
 
+update t_article set article_title = 'aaaaaaaa', article_content = 'bbbbbbbb' where article_no = 622
+
 CREATE TABLE t_boards
 (
 	board_no int NOT NULL AUTO_INCREMENT,
@@ -270,3 +272,4 @@ select (unix_timestamp(now()) - unix_timestamp(article_creation_date)) from t_ar
 
 select member_no, member_id from t_member where member_id = 'admin' 
 select member_no from t_member where member_id = 'admin' and member_pw = 'admi'
+
