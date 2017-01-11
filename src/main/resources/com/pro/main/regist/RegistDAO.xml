@@ -6,4 +6,12 @@
 
 <mapper namespace="com.pro.main.regist.RegistDAO">
 
+	<insert id="registUser" parameterType="hashMap">
+		insert into t_member (member_id, member_pw, member_name, member_email, member_point, member_level)
+		values(#{userId},#{userPw},#{username},#{email}, 300, 1);
+	</insert>
+	
+	<select id="loginProcess" parameterType="hashMap" resultType="com.pro.main.vo.MemberVO">
+		select member_no, member_id, member_name, member_pw from t_member where member_id = #{username} and member_pw = #{password}
+	</select>
 </mapper>

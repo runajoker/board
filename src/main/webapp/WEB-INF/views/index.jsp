@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="true" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <!--
 	Arcana by HTML5 UP
@@ -51,7 +52,15 @@
 								</li>
 								<li><a href="board/1/1/">자유게시판</a></li>
 								<li><a href="blog/">블로그</a></li>
-								<li><a href="regist/">regist</a></li>
+								<li>
+									<a href="login/">회원</a>
+									<ul>
+										<li><a href="regist/">회원가입</a></li>
+										<li><a href="login/">로그인</a></li>
+									</ul>
+								</li>
+								<c:if test="${userNumber eq '0'}"><li>${userNumber}비회원${session.userNumber}</a></li></c:if>
+								<c:if test="${userNumber ne '0'}"><li>${userNumber}회원${uinfo.member_no}</a></li></c:if>
 							</ul>
 						</nav>
 

@@ -164,6 +164,13 @@
 		    <version>1.55</version>
 		</dependency>
 		
+		<!--   SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d2f3350] was not registered for synchronization because synchronization is not active-->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>3.1</version>
+		</dependency>
 
 	</dependencies>
 	<build>

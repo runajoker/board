@@ -52,7 +52,7 @@ CREATE TABLE t_comment
 	article_no int NOT NULL,
 	PRIMARY KEY (comment_no)
 );
-
+select * from t_article
 
 CREATE TABLE t_member
 (
@@ -81,8 +81,12 @@ ALTER TABLE t_comment
 ;
 
 ALTER TABLE t_article
-	MODIFY COLUMN member_no int NOT NULL DEFAULT 0
+	drop COLUMN member_no
 
+ALTER TABLE t_article
+	DROP CONSTRAINT member_no_FK
+	
+	
 	update t_article set member_no = 0;
 
 ALTER TABLE t_article
@@ -264,3 +268,5 @@ select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_da
 select concat( floor((unix_timestamp(now()) - unix_timestamp(article_creation_date)) / 86400), '일 전') from t_article where article_no = 607 
 select (unix_timestamp(now()) - unix_timestamp(article_creation_date)) from t_article where article_no = 611 
 
+select member_no, member_id from t_member where member_id = 'admin' 
+select member_no from t_member where member_id = 'admin' and member_pw = 'admi'
