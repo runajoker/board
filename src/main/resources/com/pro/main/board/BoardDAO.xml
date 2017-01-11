@@ -75,4 +75,12 @@
 		insert into t_article(board_no, article_title, article_user_id, article_user_password, article_content, article_creating_ip)
 		values (#{board_no}, #{article_title}, #{article_user_id}, #{article_user_password}, #{article_content}, 'not used');	
 	</insert>
+	
+	<select id="modifyStepOneArticleRead" parameterType="int" resultType="com.pro.main.vo.ArticleVO">
+		select article_title, article_content, article_user_id from t_article where article_no = #{article_no}
+	</select>
+	
+	<update id="modifyStepTwoArticleModify" parameterType="com.pro.main.vo.ArticleVO">
+		update t_article set article_title = #{article_title}, article_content = #{article_content} where article_no = #{article_no}
+	</update>
 </mapper>

@@ -21,5 +21,9 @@ public interface BoardService {
 
 	void createArticle(ArticleVO articleVO);
 
+	ArticleVO modifyStepOneArticleRead(int member_no);
+
+	void modifyStepTwoArticleModify(ArticleVO articleVO);
+
 
 }

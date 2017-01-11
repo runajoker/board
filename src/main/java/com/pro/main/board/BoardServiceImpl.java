@@ -49,4 +49,14 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.createArticle(articleVO);
 	}
 
+	@Override
+	public ArticleVO modifyStepOneArticleRead(int member_no) {
+		return boardDAO.modifyStepOneArticleRead(member_no);
+	}
+
+	@Override
+	public void modifyStepTwoArticleModify(ArticleVO articleVO) {
+		boardDAO.modifyStepTwoArticleModify(articleVO);
+	}
+
 }

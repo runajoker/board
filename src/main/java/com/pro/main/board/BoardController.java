@@ -94,6 +94,7 @@ public class BoardController {
 
 		logger.info(session.getAttribute("userNumber").toString());
 		if (!session.getAttribute("userNumber").toString().equals("0")) {
+			// filter 사용하기위해 일단 적어둠
 			MemberVO memberVO = (MemberVO) session.getAttribute("uinfo");
 
 			articleVO.setArticle_title(request.getParameter("subject"));
@@ -139,11 +140,49 @@ public class BoardController {
 			}
 		}
 	}
-	
-	@RequestMapping(value = "/board/{board_no}/{pg}/modify/", method = RequestMethod.GET)
-	public ModelAndView moveModifyArticleForm() {
-		return null;
-		
+
+	@RequestMapping(value = "/board/{board_no}/{pg}/{article_no}/modify/", method = RequestMethod.GET)
+	public ModelAndView moveModifyArticleForm(@PathVariable int article_no, HttpSession session) {
+		ArticleVO articleVO = new ArticleVO();
+		if ((!session.getAttribute("userNumber").toString().equals("0"))) {
+			// 회원 인 경우
+
+			articleVO = boardService.modifyStepOneArticleRead(article_no);
+			logger.info("moveModifyArticleForm: " + articleVO.toString());
+		} else {
+			logger.info("b회원");
+		}
+
+		ModelAndView mav = new ModelAndView("/board/modify", "articleVO", articleVO);
+		return mav;
+
 	}
-	
+
+	@RequestMapping(value = "/board/{board_no}/{pg}/{article_no}/modify/", method = RequestMethod.POST)
+	public ModelAndView modifyArticle(@PathVariable int article_no, HttpSession session, HttpServletRequest request) {
+		ArticleVO articleVO = new ArticleVO();
+		ModelAndView mav = new ModelAndView("result");
+
+		logger.info(session.getAttribute("userNumber").toString());
+		if (!session.getAttribute("userNumber").toString().equals("0")) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("uinfo");
+
+			articleVO.setArticle_title(request.getParameter("subject"));
+			articleVO.setArticle_content(request.getParameter("content"));
+			articleVO.setArticle_no(article_no);
+			try {
+				boardService.modifyStepTwoArticleModify(articleVO);
+
+				mav.addObject("msg", "수정성공");
+				mav.addObject("url", "../");
+				return mav;
+			} catch (Exception e) {
+				mav.addObject("msg", "실패");
+				mav.addObject("url", "./");
+				return mav;
+			}
+		} else {
+			return null;
+		}
+	}
 }

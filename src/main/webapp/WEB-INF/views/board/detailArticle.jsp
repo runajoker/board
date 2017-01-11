@@ -113,10 +113,13 @@
 							<td>${articleVO.article_readcount}</td>
 						</tr>
 					</table>
-
-					<a href="delete/">삭제</a> <a href="modify/">수정</a> <a
-						href="/main/board/1/${pg}/">목록으로</a>
-
+					<div>
+					<a	href="/main/board/1/${pg}/">목록으로</a>
+					<c:if test="${userNumber ne '0'}">
+						<c:if test="${uinfo.member_id eq articleVO.article_user_id}"><a href="delete/">삭제</a> <a href="modify/">수정</a></c:if>
+					</c:if>
+					 
+					</div>	
 
 					</article>
 
