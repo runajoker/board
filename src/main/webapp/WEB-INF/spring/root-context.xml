@@ -36,6 +36,8 @@
 			<property name="sqlSessionFactory" ref="registFactory" />
 		</bean>
 		
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 
 </beans>
 
