@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -232,7 +233,6 @@ public class BoardController {
 	
 	@RequestMapping("/multiplePhotoUpload")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
-		logger.info("sex-multi");
 	    try {
 	         //파일정보
 	         String sFileInfo = "";
@@ -247,8 +247,8 @@ public class BoardController {
 	         String dftFilePath = "C:/project/person/src/main/webapp";
 	         //파일 기본경로 _ 상세경로
 	         //String filePath = dftFilePath + "/main/resources" + File.separator + "upload" + File.separator;
-	         String filePath = dftFilePath + "/main/resources/upload/";
-	         logger.info("multif default"+dftFilePath);
+	         String filePath = dftFilePath + "/resources/upload/";
+	         logger.info("multif default"+"");
 	         logger.info("multif detail"+filePath);
 	         File file = new File(filePath);
 	         if(!file.exists()) {
@@ -278,7 +278,7 @@ public class BoardController {
 	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 	         sFileInfo += "&sFileName="+ filename;;
 	         sFileInfo += "&sFileURL="+"/main/resources/upload/"+realFileNm;
-	         logger.info("SEX2"+sFileInfo);
+	         logger.info("fileInfo"+sFileInfo);
 	         PrintWriter print = response.getWriter();
 	         logger.info(print.toString());
 	         
