@@ -198,7 +198,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "/photoUpload")
 	public String photoUpload(HttpServletRequest request, PhotoVO vo){
-		logger.info("sex-single");
 	    String callback = vo.getCallback();
 	    String callback_func = vo.getCallback_func();
 	    String file_result = "";
@@ -223,7 +222,7 @@ public class BoardController {
 	            vo.getFiledata().transferTo(new File(path+realname));
 	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=/main/resources/upload/"+realname;
 	        } else {
-	            file_result += "&errstr=error";
+	            file_result += "&errstr=error";	
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -231,7 +230,7 @@ public class BoardController {
 	    return "redirect:" + callback + "?callback_func="+callback_func+file_result;
 	}
 	
-	@RequestMapping("/multiplePhotoUpload")
+	@RequestMapping(value = "/multiplePhotoUpload")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
 	    try {
 	         //파일정보
@@ -244,7 +243,7 @@ public class BoardController {
 	         filename_ext = filename_ext.toLowerCase();
 	         //파일 기본경로
 	         //String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-	         String dftFilePath = "C:/project/person/src/main/webapp";
+	         String dftFilePath = "C:/project/board/src/main/webapp";
 	         //파일 기본경로 _ 상세경로
 	         //String filePath = dftFilePath + "/main/resources" + File.separator + "upload" + File.separator;
 	         String filePath = dftFilePath + "/resources/upload/";

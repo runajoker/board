@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set value="${pg}" var="page" />
 <c:set value="${paging}" var="num" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,9 +11,36 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-<link rel="stylesheet" href="../../../../resources/assets/css/main.css" />
+<link rel="stylesheet" href="/main/resources/assets/css/main.css" />
 <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+<script type="text/javascript">
+	function comment_insert() {
+		var com_url = 'comment/insert/';
+		var usr_no = $
+		{
+			userNumber
+		}
+		;
+		console.log(usr_no);
+		/* $.ajax({
+		   url:com_url,
+		   method:'post',
+		   data:{
+		      art_no:'${vo.art_no}',
+		      com_comment:$('#comment').val(),
+		      m_no:'${session.m_no}'
+		   }
+		
+		}).done(function(data){
+		   
+		   comment_list();
+		   $('#comment').val('');
+		}); */
+	}
+</script>
+
 </head>
 <body>
 	<div id="page-wrapper">
@@ -27,27 +54,27 @@
 
 			<!-- Nav -->
 			<nav id="nav">
-			<ul>
-				<!-- <li class="current"><a href="/main">Home</a></li> -->
-				<li><a href="#">Dropdown</a>
-					<ul>
-						<li><a href="#">주인 소개</a></li>
-						<li><a href="#">Magna phasellus</a></li>
-						<li><a href="#">Etiam sed tempus</a></li>
-						<li><a href="#">Submenu</a>
-							<ul>
-								<li><a href="#">Lorem dolor</a></li>
-								<li><a href="#">Phasellus magna</a></li>
-								<li><a href="#">Magna phasellus</a></li>
-								<li><a href="#">Etiam nisl</a></li>
-								<li><a href="#">Veroeros feugiat</a></li>
-							</ul></li>
-						<li><a href="#">Veroeros feugiat</a></li>
-					</ul></li>
-				<li class="current"><a href="../../../../board/1/1/">자유게시판</a></li>
-				<li><a href="blog/">블로그</a></li>
-				<li><a href="regist/">regist</a></li>
-			</ul>
+				<ul>
+					<!-- <li class="current"><a href="/main">Home</a></li> -->
+					<li><a href="#">Dropdown</a>
+						<ul>
+							<li><a href="#">주인 소개</a></li>
+							<li><a href="#">Magna phasellus</a></li>
+							<li><a href="#">Etiam sed tempus</a></li>
+							<li><a href="#">Submenu</a>
+								<ul>
+									<li><a href="#">Lorem dolor</a></li>
+									<li><a href="#">Phasellus magna</a></li>
+									<li><a href="#">Magna phasellus</a></li>
+									<li><a href="#">Etiam nisl</a></li>
+									<li><a href="#">Veroeros feugiat</a></li>
+								</ul></li>
+							<li><a href="#">Veroeros feugiat</a></li>
+						</ul></li>
+					<li class="current"><a href="../../../../board/1/1/">자유게시판</a></li>
+					<li><a href="blog/">블로그</a></li>
+					<li><a href="regist/">regist</a></li>
+				</ul>
 			</nav>
 
 		</div>
@@ -58,74 +85,110 @@
 
 		<!-- Main -->
 		<section class="wrapper style1">
-		<div class="container">
-			<div class="row 200%">
-				<div class="4u 12u(narrower)">
-					<div id="sidebar">
+			<div class="container">
+				<div class="row 200%">
+					<div class="4u 12u(narrower)">
+						<div id="sidebar">
 
-						<!-- Sidebar -->
+							<!-- Sidebar -->
 
-						<section>
-						<h3>Just a Subheading</h3>
-						<p>Phasellus quam turpis, feugiat sit amet ornare in,
-							hendrerit in lectus. Praesent semper mod quis eget mi. Etiam eu
-							ante risus. Aliquam erat volutpat. Aliquam luctus et mattis
-							lectus sit amet pulvinar. Nam turpis et nisi etiam.</p>
-						<footer> <a href="#" class="button">Continue Reading</a>
-						</footer> </section>
+							<section>
+								<h3>Just a Subheading</h3>
+								<p>Phasellus quam turpis, feugiat sit amet ornare in,
+									hendrerit in lectus. Praesent semper mod quis eget mi. Etiam eu
+									ante risus. Aliquam erat volutpat. Aliquam luctus et mattis
+									lectus sit amet pulvinar. Nam turpis et nisi etiam.</p>
+								<footer>
+									<a href="#" class="button">Continue Reading</a>
+								</footer>
+							</section>
 
+						</div>
 					</div>
-				</div>
-				<div class="8u  12u(narrower) important(narrower)">
-					<div id="content">
+					<div class="8u  12u(narrower) important(narrower)">
+						<div id="content">
 
-						<!-- Content -->
+							<!-- Content -->
 
-						<article> <header>
-						<h2>자유게시판</h2>
-						<p>자유롭게 이야기 하는 게시판.</p>
-						</header>
+							<article>
+								<header>
+									<h2>자유게시판</h2>
+									<p>자유롭게 이야기 하는 게시판.</p>
+								</header>
+						</div>
+
+						<table>
+							<tr>
+								<th>글번호</th>
+								<td>${articleVO.article_no}</td>
+							</tr>
+							<tr>
+								<th>작성자</th>
+								<td>${articleVO.article_user_id}</td>
+							</tr>
+							<tr>
+								<th>글제목</th>
+								<td>${articleVO.article_title}</td>
+							</tr>
+							<tr>
+								<th>글내용</th>
+								<td>${articleVO.article_content}</td>
+							</tr>
+							<tr>
+								<th>작성일</th>
+								<td>${articleVO.article_creation_date}</td>
+							</tr>
+							<tr>
+								<th>조회수</th>
+								<td>${articleVO.article_readcount}</td>
+							</tr>
+						</table>
+						<div>
+							<a href="/main/board/1/${pg}/">목록으로</a>
+							<c:if test="${userNumber ne '0'}">
+								<c:if test="${uinfo.member_id eq articleVO.article_user_id}">
+									<a href="delete/">삭제</a>
+									<a href="modify/">수정</a>
+								</c:if>
+							</c:if>
+							<c:if test="${userNumber eq '0'}">
+								<a href="delete/">삭제</a>
+								<a href="modify/">수정</a>
+							</c:if>
+
+						</div>
+
+						</article>
+						<hr>
+						<c:if test="${userNumber eq '0'}">
+							<div>
+								<table width="100%" class="commentlayout">
+									<tr>
+										<td width="20%"><input type="text" class="comment"
+											id="username" placeholder="이름" /> <input type="password"
+											class="comment" "id="password" placeholder="비밀번호" /></td>
+										<td width="60%"><textarea class="commenttext"
+												id="content" placeholder="내용을 입력해주세요"></textarea></td>
+										<td width="20%"><input type="button" value="전송"
+											onclick="javascript:comment_insert();"/ ></td>
+									</tr>
+								</table>
+							</div>
+						</c:if>
+						<c:if test="${userNumber ne '0'}">
+							<table width="100%" class="commentlayout">
+								<tr>
+									<td width="20%">${uinfo.member_name}</td>
+									<td width="60%"><textarea class="commenttext" id="content"
+											placeholder="내용을 입력해주세요"></textarea></td>
+									<td width="20%"><input type="button" value="전송"
+										onclick="javascript:comment_insert();"/ ></td>
+								</tr>
+							</table>
+						</c:if>
 					</div>
-
-					<table>
-						<tr>
-							<th>글번호</th>
-							<td>${articleVO.article_no}</td>
-						</tr>
-						<tr>
-							<th>작성자</th>
-							<td>${articleVO.article_user_id}</td>
-						</tr>
-						<tr>
-							<th>글제목</th>
-							<td>${articleVO.article_title}</td>
-						</tr>
-						<tr>
-							<th>글내용</th>
-							<td>${articleVO.article_content}</td>
-						</tr>
-						<tr>
-							<th>작성일</th>
-							<td>${articleVO.article_creation_date}</td>
-						</tr>
-						<tr>
-							<th>조회수</th>
-							<td>${articleVO.article_readcount}</td>
-						</tr>
-					</table>
-					<div>
-					<a	href="/main/board/1/${pg}/">목록으로</a>
-					<c:if test="${userNumber ne '0'}">
-						<c:if test="${uinfo.member_id eq articleVO.article_user_id}"><a href="delete/">삭제</a> <a href="modify/">수정</a></c:if>
-					</c:if>
-					 
-					</div>	
-
-					</article>
-
 				</div>
 			</div>
-		</div>
 	</div>
 	</section>
 
