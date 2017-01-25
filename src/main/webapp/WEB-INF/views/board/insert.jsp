@@ -40,6 +40,52 @@
 </script>
 </head>
 <body>
+<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Logo -->
+						<h1><a href="/main" id="logo">HoonHoon's HomePage</a></h1>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<!-- <li class="current"><a href="/main">Home</a></li> -->
+								<li>
+									<a href="#">Dropdown</a>
+									<ul>
+										<li><a href="#">주인 소개</a></li>
+										<li><a href="#">Magna phasellus</a></li>
+										<li><a href="#">Etiam sed tempus</a></li>
+										<li>
+											<a href="#">Submenu</a>
+											<ul>
+												<li><a href="#">Lorem dolor</a></li>
+												<li><a href="#">Phasellus magna</a></li>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam nisl</a></li>
+												<li><a href="#">Veroeros feugiat</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Veroeros feugiat</a></li>
+									</ul>
+								</li>
+								<li><a href="board/1/1/">자유게시판</a></li>
+								<li><a href="blog/">블로그</a></li>
+								<li>
+									<a href="login/">회원</a>
+									<ul>
+										<li><a href="regist/">회원가입</a></li>
+										<li><a href="login/">로그인</a></li>
+									</ul>
+								</li>
+								<c:if test="${userNumber eq '0'}"><li>${userNumber}비회원${session.userNumber}</a></li></c:if>
+								<c:if test="${userNumber ne '0'}"><li>${userNumber}회원${uinfo.member_no}</a></li></c:if>
+							</ul>
+						</nav>
+
+				</div>
 	<div>
 		<form method="post" id="myForm" action=""
 			enctype="multipart/form-data">
@@ -66,5 +112,39 @@
 
 		</form>
 	</div>
+				<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+						
+						
+						</div>
+					</div>
+
+					<!-- Icons -->
+						<ul class="icons">
+							<li><a href="https://twitter.com/kj7310" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/sanghoon.kim.35" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="https://github.com/runajoker" class="icon fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+
+					<!-- Copyright -->
+						<div class="copyright">
+							<ul class="menu">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="../../../../resources/assets/js/jquery.min.js"></script>
+			<script src="../../../../resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="../../../../resources/assets/js/skel.min.js"></script>
+			<script src="../../../../resources/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../../../resources/assets/js/main.js"></script>
 </body>
 </html>

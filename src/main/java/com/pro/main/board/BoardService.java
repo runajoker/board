@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pro.main.vo.ArticleVO;
+import com.pro.main.vo.CommentVO;
 
 public interface BoardService {
 
@@ -24,6 +25,10 @@ public interface BoardService {
 	ArticleVO modifyStepOneArticleRead(int member_no);
 
 	void modifyStepTwoArticleModify(ArticleVO articleVO);
+
+	List<CommentVO> getCommentList(int article_no);
+
+	void insertComment(CommentVO commentVO);
 
 
 }

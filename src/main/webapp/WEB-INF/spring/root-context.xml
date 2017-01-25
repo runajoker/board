@@ -9,6 +9,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	
+
 	<!-- mybatis running needs this beans properties -->
 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" 
 			p:jndiName="java:comp/env/jdbc/person" /> 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pro.main.vo.ArticleVO;
+import com.pro.main.vo.CommentVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -58,5 +59,20 @@ public class BoardServiceImpl implements BoardService {
 	public void modifyStepTwoArticleModify(ArticleVO articleVO) {
 		boardDAO.modifyStepTwoArticleModify(articleVO);
 	}
+
+	@Override
+	public List<CommentVO> getCommentList(int article_no) {
+		return boardDAO.getCommentList(article_no);
+	}
+
+	@Override
+	public void insertComment(CommentVO commentVO) {
+		boardDAO.insertComment(commentVO);
+	}
+
+
+
+
+
 
 }

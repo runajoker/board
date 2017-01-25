@@ -54,6 +54,8 @@ CREATE TABLE t_comment
 	article_no int NOT NULL,
 	PRIMARY KEY (comment_no)
 );
+insert into t_comment(comment_user_id, comment_user_pw, comment_content, article_no, comment_creation_ip)
+values ('admin', 'admin', '댓글 test', 611, 'not used')
 select * from t_article
 
 CREATE TABLE t_member
@@ -274,3 +276,5 @@ select member_no, member_id from t_member where member_id = 'admin'
 select member_no from t_member where member_id = 'admin' and member_pw = 'admi'
 
 select * from t_member
+
+select comment_no, comment_user_id, comment_content, comment_creation_date from t_comment where article_no = 611

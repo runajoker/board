@@ -12,33 +12,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="/main/resources/assets/css/main.css" />
+
 <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-
+<!-- Scripts -->
+<script src="/main/resources/assets/js/jquery.min.js"></script>
+<script src="/main/resources/assets/js/jquery.dropotron.min.js"></script>
+<script src="/main/resources/assets/js/skel.min.js"></script>
+<script src="/main/resources/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script type="text/javascript">
 	function comment_insert() {
-		var com_url = 'comment/insert/';
-		var usr_no = $
-		{
-			userNumber
-		}
-		;
+		var com_url = 'comment/insert';
+		var usr_no = ${userNumber};
 		console.log(usr_no);
-		/* $.ajax({
-		   url:com_url,
-		   method:'post',
-		   data:{
-		      art_no:'${vo.art_no}',
-		      com_comment:$('#comment').val(),
-		      m_no:'${session.m_no}'
-		   }
-		
-		}).done(function(data){
+		if(usr_no === 0) {
+			console.log('0');
+			 $.ajax({
+				   url:com_url,
+				   method:'post',
+				   data:{
+					   user_no:'0',
+					      comment_user_id:$('#username').val(),
+					      comment_content : $('#comment').val(),
+					      comment_password : $('#pw').val()   
+			      
+				   }
+	   }).done(function(data){
 		   
 		   comment_list();
 		   $('#comment').val('');
-		}); */
-	}
+		}); 
+	} 
+		else {
+		  console.log('1');
+		  $.ajax({
+			   url:com_url,
+			   method:'post',
+			   data:{
+				   user_no:'1',
+				      comment_user_id:$('#username').val(),
+				      comment_content : $('#comment').val(),
+				      comment_password : 'not used'   
+		      
+			   }
+		  }).done(function(data){
+			   
+			   comment_list();
+			   $('#comment').val('');
+			}); 
+		}
+		
+		
+		}
+	
+	$(document).ready(function(){
+		   comment_list();
+		});
+	
+	function comment_list(){
+		   var com_url = 'comment/list';
+		   $.ajax({
+		      url:com_url,
+		      method:'post',
+		      data:{
+		         art_no:'${ArticleVO.article_no}'
+		      }
+		   }).done(function(data){
+		      var comment_list = '';
+		         comment_list += '   <table boarder="1" nowrap width="700" class="table table-condensed">';
+		      $.each(data, function(key,val){
+		         comment_list += '      <tr id="'+val['comment_no']+'">';
+		         comment_list += '         <td nowrap width="100">';
+		         comment_list += '         '+val['comment_user_id'];
+		         comment_list += '         </td>';
+		         comment_list += '         <td >';
+		         comment_list += '            '+val['comment_content'];
+		         comment_list += '         </td>';
+		         comment_list += '         <td nowrap width="100">';
+		         
+		         /* if(val['com_regdate'] == ${date} ){ */
+		         comment_list += '            '+val['comment_creation_date'];
+		         
+		         
+		         comment_list += '         </td>';
+		     /*     if(val['m_no']=='${session.m_no}'){
+		         comment_list += '         <td nowrap width="100">';
+		            comment_list += '         <a href="javascript:comment_update('+val['com_no']+' );">수정</a>';
+		            comment_list += '         <a href="javascript:comment_delete('+val['com_no']+' );">삭제</a>';
+		         comment_list += '         </td>';            
+		         } */
+		         
+		         comment_list += '   </tr>';
+		         
+		      });
+		         comment_list += '   </table>';
+		      $('#viewcomment').html(comment_list);
+		   });
+		}
 </script>
 
 </head>
@@ -71,7 +142,7 @@
 								</ul></li>
 							<li><a href="#">Veroeros feugiat</a></li>
 						</ul></li>
-					<li class="current"><a href="../../../../board/1/1/">자유게시판</a></li>
+					<li class="current"><a href="/main/board/1/1/">자유게시판</a></li>
 					<li><a href="blog/">블로그</a></li>
 					<li><a href="regist/">regist</a></li>
 				</ul>
@@ -160,15 +231,18 @@
 
 						</article>
 						<hr>
+						<div id="viewcomment" style="background: #EEEEEE;"
+							class="form-inline"></div>
+						<hr>
 						<c:if test="${userNumber eq '0'}">
 							<div>
 								<table width="100%" class="commentlayout">
 									<tr>
 										<td width="20%"><input type="text" class="comment"
-											id="username" placeholder="이름" /> <input type="password"
-											class="comment" "id="password" placeholder="비밀번호" /></td>
+											id="username" placeholder="이름" />
+											 <input type="password" class="comment" id="pw" placeholder="비밀번호" /></td>
 										<td width="60%"><textarea class="commenttext"
-												id="content" placeholder="내용을 입력해주세요"></textarea></td>
+												id="comment" placeholder="내용을 입력해주세요"></textarea></td>
 										<td width="20%"><input type="button" value="전송"
 											onclick="javascript:comment_insert();"/ ></td>
 									</tr>
@@ -179,7 +253,7 @@
 							<table width="100%" class="commentlayout">
 								<tr>
 									<td width="20%">${uinfo.member_name}</td>
-									<td width="60%"><textarea class="commenttext" id="content"
+									<td width="60%"><textarea class="commenttext" id="comment"
 											placeholder="내용을 입력해주세요"></textarea></td>
 									<td width="20%"><input type="button" value="전송"
 										onclick="javascript:comment_insert();"/ ></td>
@@ -218,13 +292,7 @@
 
 	</div>
 
-	<!-- Scripts -->
-	<script src="../../../../resources/assets/js/jquery.min.js"></script>
-	<script src="../../../../resources/assets/js/jquery.dropotron.min.js"></script>
-	<script src="../../../../resources/assets/js/skel.min.js"></script>
-	<script src="../../../../resources/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="../../../../resources/assets/js/main.js"></script>
+
 
 </body>
 </html>
