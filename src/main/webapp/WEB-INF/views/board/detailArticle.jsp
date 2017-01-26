@@ -72,6 +72,7 @@
 	
 	function comment_list(){
 		   var com_url = 'comment/list';
+		   var usr_no = ${userNumber};
 		   $.ajax({
 		      url:com_url,
 		      method:'post',
@@ -83,25 +84,27 @@
 		         comment_list += '   <table boarder="1" nowrap width="700" class="table table-condensed">';
 		      $.each(data, function(key,val){
 		         comment_list += '      <tr id="'+val['comment_no']+'">';
-		         comment_list += '         <td nowrap width="100">';
+		         comment_list += '         <td nowrap width="20%">';
 		         comment_list += '         '+val['comment_user_id'];
 		         comment_list += '         </td>';
-		         comment_list += '         <td >';
+		         comment_list += '         <td nowrap width="80%">';
 		         comment_list += '            '+val['comment_content'];
 		         comment_list += '         </td>';
-		         comment_list += '         <td nowrap width="100">';
+		         comment_list += '         <td nowrap width="20%">';
 		         
-		         /* if(val['com_regdate'] == ${date} ){ */
+		         
 		         comment_list += '            '+val['comment_creation_date'];
-		         
-		         
+		         if(usr_no == 0) {
+		        	 
+		         comment_list += '         <td nowrap width="5%">';
+	             comment_list += '         <a href="javascript:comment_delete('+val['comment_no']+' );"><img src="/main/resources/images/btn_close.gif" alt="btn_close"></a>';	 
 		         comment_list += '         </td>';
-		     /*     if(val['m_no']=='${session.m_no}'){
-		         comment_list += '         <td nowrap width="100">';
-		            comment_list += '         <a href="javascript:comment_update('+val['com_no']+' );">수정</a>';
-		            comment_list += '         <a href="javascript:comment_delete('+val['com_no']+' );">삭제</a>';
-		         comment_list += '         </td>';            
-		         } */
+		         } else {
+		        	 
+		         comment_list += '         </td>';
+		         comment_list += '         <td nowrap width="5%">';
+		         comment_list += '         </td>';
+		         }
 		         
 		         comment_list += '   </tr>';
 		         
@@ -110,6 +113,9 @@
 		      $('#viewcomment').html(comment_list);
 		   });
 		}
+	function comment_delete(comment_no) {
+		alert(comment_no);
+	}
 </script>
 
 </head>
